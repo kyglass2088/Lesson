@@ -2,22 +2,6 @@ using NUnit.Framework.Internal;
 using System;
 using UnityEngine;
 
-public class Enemy
-{
-    public void KillPlayer()
-    {
-        EventBus<TestEvent>.Raise(new TestEvent());
-
-        EventBus<PlayerEvent>.Raise(new PlayerEvent
-        {
-            health = 0,
-            mana = 0
-        });
-
-    }
-
-}
-
 public class Player : MonoBehaviour
 {
     EventBinding<TestEvent> testEventBinding;
@@ -29,16 +13,7 @@ public class Player : MonoBehaviour
         EventBus<TestEvent>.Register(testEventBinding);
 
         playerEventBinding = new EventBinding<PlayerEvent>(HandlePlayerEvent);
-        EventBus<TestEvent>.Register(testEventBinding);
-    }
-
-    void SlowDown()
-    {
-
-    }
-    void SpeedUp()
-    {
-
+        EventBus<PlayerEvent>.Register(playerEventBinding);
     }
 
 
@@ -53,6 +28,18 @@ public class Player : MonoBehaviour
         Debug.Log("Test event ");
     }
 
+    int MyMethodWithParam(int number)
+    {
+        Debug.Log("MyMethodWithParam! " + number);
+
+        return number * number;
+    }
+
+    void MyMethod()
+    {
+        Debug.Log("myAction!");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -60,16 +47,17 @@ public class Player : MonoBehaviour
         {
             EventBus<TestEvent>.Raise(new TestEvent());
         }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            EventBus<PlayerEvent>.Raise(new PlayerEvent
-            {
-                health = 0,
-                mana = 0
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    EventBus<PlayerEvent>.Raise(new PlayerEvent
+        //    {
+        //        health = 0,
+        //        mana = 0,
+        //        myAction = MyMethod,
+        //        myFunc = MyMethodWithParam
+        //    });
 
-            });
 
-
-        }
+        //}
     }
 }
