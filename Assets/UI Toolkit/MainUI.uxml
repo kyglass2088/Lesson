@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgb(0, 32, 255);">
+        <ui:Button text="TopButton" name="TopButton" />
+        <ui:Button text="MaxSliderButton" name="MaxSliderButton" />
+        <ui:Button text="Button" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgb(255, 254, 0);">
+        <ui:Toggle label="Toggle" />
+        <ui:Label text="Label" />
+        <ui:Slider label="Slider" value="42" high-value="100" name="Volume" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1;" />
+</ui:UXML>
