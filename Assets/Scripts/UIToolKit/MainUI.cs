@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,19 +11,22 @@ public class MainUI : MonoBehaviour
     private Button SliderButton;
     private Slider mySlider;
 
+    public Player player;
+
     private void Start()
     {
         VisualElement root = myUI.rootVisualElement;
 
         TopButton = root.Q<Button>("TopButton");
         SliderButton = root.Q<Button>("MaxSliderButton");
-        mySlider = root.Q<Slider>("Volume");
+        mySlider = root.Q<Slider>("Damage");
 
         mySlider.RegisterValueChangedCallback(v =>
         {
             var oldValue = v.previousValue;
             var newValue = v.newValue;
             Debug.Log(v.newValue);
+            player.Damage = v.newValue;
         });
 
         if (TopButton != null)
@@ -48,6 +52,7 @@ public class MainUI : MonoBehaviour
         StartCoroutine(AddSliderValue());
     }
 
+
     private IEnumerator AddSliderValue()
     {
         while (true)
@@ -59,5 +64,8 @@ public class MainUI : MonoBehaviour
         }
     }
 
-
+    internal void UpdatePowerSlider(int power)
+    {
+        //throw new NotImplementedException();
+    }
 }

@@ -4,8 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int Power = 100;
+    public float Damage;
+    public MainUI mainUI;
+
     EventBinding<TestEvent> testEventBinding;
     EventBinding<PlayerEvent> playerEventBinding;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Item Collision");
+        Power += 50;
+        if (collision.gameObject.name == "item")
+        {
+            Debug.Log("Item Collision");
+        }
+        if (collision.gameObject.name != "item")
+        {
+            //Power -= 50;
+            Debug.Log("Not Item Collision");
+        }
+
+        mainUI.UpdatePowerSlider(Power);
+    }
 
     private void OnEnable()
     {
