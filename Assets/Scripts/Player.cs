@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator anim;
+
     public int Power = 100;
     public float Damage;
-    public MainUI mainUI;
+    //public MainUI mainUI;
 
     EventBinding<TestEvent> testEventBinding;
     EventBinding<PlayerEvent> playerEventBinding;
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
             Debug.Log("Not Item Collision");
         }
 
-        mainUI.UpdatePowerSlider(Power);
+        //mainUI.UpdatePowerSlider(Power);
     }
 
     private void OnEnable()
@@ -66,19 +68,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            EventBus<TestEvent>.Raise(new TestEvent());
+            anim.SetTrigger("Run");
         }
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    EventBus<PlayerEvent>.Raise(new PlayerEvent
-        //    {
-        //        health = 0,
-        //        mana = 0,
-        //        myAction = MyMethod,
-        //        myFunc = MyMethodWithParam
-        //    });
-
-
-        //}
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            anim.SetTrigger("Walk");
+        }
     }
 }
