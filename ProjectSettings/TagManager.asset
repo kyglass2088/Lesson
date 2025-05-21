@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - CinemachineTarget
+  - Ground
+  - Item
+  - Trap
   layers:
   - Default
   - TransparentFX
