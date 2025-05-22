@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Item
   - Trap
+  - User
   layers:
   - Default
   - TransparentFX
