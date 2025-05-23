@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class HiddenTrap : MonoBehaviour
 {
-    // Sound
     public static event Action<Vector3> OnTrapHActivateEvent;
+
     Renderer renderer;
 
     private void Start()

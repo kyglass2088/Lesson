@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class Player : MonoBehaviour
 {
     public Animator anim;
     private Rigidbody rb;
+    public MainUI mainUI;
 
     public int Power = 100;
     public float Damage;
@@ -27,24 +27,42 @@ public class Player : MonoBehaviour
     private float jumpForce = 5.0f;
     private bool isGrounded = true;
 
+    private bool isMoveDisturbance = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    public void InstanceKill()
+    {
+        OnGameOverEvent?.Invoke();
+        Destroy(this);
+    }
+
+    public void MoveDisturbance(float speed, float jumpforce)
+    {
+        if (isMoveDisturbance)
+        {
+            moveSpeed -= speed;
+            jumpForce -= jumpforce;
+        }
+    }
+
     // 이벤트 퍼블리셔
     public static event Action OnPlayerHitSomethingEvent;
+    public static event Action OnGameOverEvent;
     public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
     private void OnTriggerEnter(Collider other)
     {
-        OnPlayerHitSomethingEvent?.Invoke();
-        OnPlayerHitSomethingEventWithObj?.Invoke(other.gameObject);
+        //OnPlayerHitSomethingEvent?.Invoke();
+        //OnPlayerHitSomethingEventWithObj?.Invoke(other.gameObject);
     }
     void OnCollisionEnter(Collision collision)
     {
-        OnPlayerHitSomethingEvent?.Invoke();
-        OnPlayerHitSomethingEventWithObj?.Invoke(collision.gameObject);
+        //OnPlayerHitSomethingEvent?.Invoke();
+        //OnPlayerHitSomethingEventWithObj?.Invoke(collision.gameObject);
 
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -55,9 +73,15 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Item");
         }
+        else if (collision.gameObject.CompareTag("MovementTrap"))
+        {
+            isMoveDisturbance = true;
+        }
         else if (collision.gameObject.CompareTag("Trap"))
         {
-            Power -= 20;
+            Debug.Log("Trap for ");
+            rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
+            mainUI.UpdateDecreaseHpBar(10);
             Debug.Log("Trap");
         }
     }
@@ -90,15 +114,6 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            anim.SetTrigger("Attack01");
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            anim.SetTrigger("Attack04");
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class MainUI : MonoBehaviour
 {
-    VisualElement mainUI;
+    public VisualElement mainUI;
 
     ProgressBar HpBar;
     Label LifeLabel;
@@ -14,20 +14,26 @@ public class MainUI : MonoBehaviour
 
     private void Start()
     {
-        VisualElement root = GetComponent<VisualElement>();
+        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         HpBar = root.Q<ProgressBar>("Hp");
         LifeLabel = root.Q<Label>("Life");
         TimeLabel = root.Q<Label>("Time");
         Stage = root.Q<Label>("State");
         ETCLabel = root.Q<Label>("Etc");
 
-        Player.OnPlayerHitSomethingEvent += Player_OnPlayerHitSomethingEvent;
+        Player.OnGameOverEvent += Player_OnGameOverEvent;
     }
 
-    private void Player_OnPlayerHitSomethingEvent()
+    public void UpdateDecreaseHpBar(int number)
     {
-        HpBar.value -= 10;
+        HpBar.value -= number;
     }
+
+    private void Player_OnGameOverEvent()
+    {
+        HpBar.value = 0;
+    }
+
 }
 
 //using System;
