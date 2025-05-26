@@ -9,6 +9,8 @@ TagManager:
   - Item
   - Trap
   - User
+  - MovementTrap
+  - Goal
   layers:
   - Default
   - TransparentFX

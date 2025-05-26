@@ -20,14 +20,15 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     public MainUI mainUI;
 
+    private float originalMoveSpeed = 5.0f;
+    private float originalJumpForce = 5.0f;
+
     public int Power = 100;
     public float Damage;
 
     public float moveSpeed = 5f;
     private float jumpForce = 5.0f;
     private bool isGrounded = true;
-
-    private bool isMoveDisturbance = false;
 
     private void Start()
     {
@@ -40,18 +41,27 @@ public class Player : MonoBehaviour
         Destroy(this);
     }
 
+    public void GameClear()
+    {
+        OnGameClearEvent?.Invoke();
+    }
+
     public void MoveDisturbance(float speed, float jumpforce)
     {
-        if (isMoveDisturbance)
-        {
-            moveSpeed -= speed;
-            jumpForce -= jumpforce;
-        }
+        moveSpeed -= speed;
+        jumpForce -= jumpforce;
+    }
+
+    public void InitializeMovement()
+    {
+        moveSpeed = originalMoveSpeed;
+        jumpForce = originalJumpForce;
     }
 
     // 이벤트 퍼블리셔
     public static event Action OnPlayerHitSomethingEvent;
     public static event Action OnGameOverEvent;
+    public static event Action OnGameClearEvent;
     public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
     private void OnTriggerEnter(Collider other)
@@ -69,20 +79,21 @@ public class Player : MonoBehaviour
             Debug.Log("Ground");
             isGrounded = true;
         }
-        else if (collision.gameObject.CompareTag("Item"))
+        if (collision.gameObject.CompareTag("Item"))
         {
             Debug.Log("Item");
         }
-        else if (collision.gameObject.CompareTag("MovementTrap"))
-        {
-            isMoveDisturbance = true;
-        }
-        else if (collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap"))
         {
             Debug.Log("Trap for ");
             rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
             mainUI.UpdateDecreaseHpBar(10);
             Debug.Log("Trap");
+        }
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            Debug.Log("collision Goal");
+            OnGameClearEvent?.Invoke();
         }
     }
 

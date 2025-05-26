@@ -11,6 +11,7 @@ public class MainUI : MonoBehaviour
     Label TimeLabel;
     Label Stage;
     Label ETCLabel;
+    Label ClearMessage;
 
     private void Start()
     {
@@ -20,8 +21,11 @@ public class MainUI : MonoBehaviour
         TimeLabel = root.Q<Label>("Time");
         Stage = root.Q<Label>("State");
         ETCLabel = root.Q<Label>("Etc");
+        ClearMessage = root.Q<Label>("ClearMessage");
+        ClearMessage.SetEnabled(false);
 
         Player.OnGameOverEvent += Player_OnGameOverEvent;
+        Player.OnGameClearEvent += Player_OnGameClearEvent;
     }
 
     public void UpdateDecreaseHpBar(int number)
@@ -32,6 +36,11 @@ public class MainUI : MonoBehaviour
     private void Player_OnGameOverEvent()
     {
         HpBar.value = 0;
+    }
+
+    private void Player_OnGameClearEvent()
+    {
+        ClearMessage.SetEnabled(true);
     }
 
 }
