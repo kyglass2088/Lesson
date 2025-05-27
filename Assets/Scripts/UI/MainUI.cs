@@ -12,6 +12,9 @@ public class MainUI : MonoBehaviour
     Label Stage;
     Label ETCLabel;
     Label ClearMessage;
+    Label GameOverMessage;
+    Button AgainButton;
+    Button ExitButton;
 
     private void Start()
     {
@@ -22,10 +25,17 @@ public class MainUI : MonoBehaviour
         Stage = root.Q<Label>("State");
         ETCLabel = root.Q<Label>("Etc");
         ClearMessage = root.Q<Label>("ClearMessage");
-        ClearMessage.SetEnabled(false);
+        GameOverMessage = root.Q<Label>("GameOver");
+        AgainButton = root.Q<Button>("AgainButton");
+        ExitButton = root.Q<Button>("ExitButton");
+
+        ClearMessage.style.display = DisplayStyle.None;
+        GameOverMessage.style.display = DisplayStyle.None;
+        AgainButton.style.display = DisplayStyle.None;
+        ExitButton.style.display = DisplayStyle.None;
 
         Player.OnGameOverEvent += Player_OnGameOverEvent;
-        Player.OnGameClearEvent += Player_OnGameClearEvent;
+        Goal.OnGameClearEvent += Player_OnGameClearEvent;
     }
 
     public void UpdateDecreaseHpBar(int number)
@@ -36,11 +46,16 @@ public class MainUI : MonoBehaviour
     private void Player_OnGameOverEvent()
     {
         HpBar.value = 0;
+        GameOverMessage.style.display = DisplayStyle.Flex;
+        AgainButton.style.display = DisplayStyle.Flex;
+        ExitButton.style.display = DisplayStyle.Flex;
     }
 
     private void Player_OnGameClearEvent()
     {
-        ClearMessage.SetEnabled(true);
+        ClearMessage.style.display = DisplayStyle.Flex;
+        AgainButton.style.display = DisplayStyle.Flex;
+        ExitButton.style.display = DisplayStyle.Flex;
     }
 
 }

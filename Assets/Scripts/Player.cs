@@ -1,19 +1,6 @@
 using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-    private void Start()
-    {
-        Player.OnPlayerHitSomethingEvent += Player_OnPlayerHitSomethingEvent;
-    }
-
-    private void Player_OnPlayerHitSomethingEvent()
-    {
-
-    }
-}
-
 public class Player : MonoBehaviour
 {
     public Animator anim;
@@ -33,6 +20,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Goal.OnGameClearEvent += GameClear;
     }
 
     public void InstanceKill()
@@ -43,7 +31,8 @@ public class Player : MonoBehaviour
 
     public void GameClear()
     {
-        OnGameClearEvent?.Invoke();
+        moveSpeed = 0f;
+        jumpForce = 0f;
     }
 
     public void MoveDisturbance(float speed, float jumpforce)
@@ -61,7 +50,6 @@ public class Player : MonoBehaviour
     // 이벤트 퍼블리셔
     public static event Action OnPlayerHitSomethingEvent;
     public static event Action OnGameOverEvent;
-    public static event Action OnGameClearEvent;
     public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
     private void OnTriggerEnter(Collider other)
@@ -89,11 +77,6 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
             mainUI.UpdateDecreaseHpBar(10);
             Debug.Log("Trap");
-        }
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            Debug.Log("collision Goal");
-            OnGameClearEvent?.Invoke();
         }
     }
 
