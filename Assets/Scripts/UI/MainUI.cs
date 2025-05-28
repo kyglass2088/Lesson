@@ -34,11 +34,13 @@ public class MainUI : MonoBehaviour
         AgainButton.style.display = DisplayStyle.None;
         ExitButton.style.display = DisplayStyle.None;
 
+        //HpBar.value = 
+
         Player.OnGameOverEvent += Player_OnGameOverEvent;
         Goal.OnGameClearEvent += Player_OnGameClearEvent;
     }
 
-    public void UpdateDecreaseHpBar(int number)
+    public void UpdateDecreaseHpBar(float number)
     {
         HpBar.value -= number;
     }

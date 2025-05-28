@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject MoveTrapPrefab;
+    public GameObject[] Traps = new GameObject[3];
     public GameObject HiddenInstanceKillTrapPrefab;
     public GameObject HiddenTrapPrefab;
 
@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     void CreateTraps()
     {
-        for (int i = 0; i < MaxTrapNumbers; i += Random.Range(1, 3))
+        for (int i = 0; i < MaxTrapNumbers; i++)
         {
-            GameObject clone = Instantiate(MoveTrapPrefab, position[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], position[i].position, Quaternion.identity);
             clone.transform.parent = _parent;
 
         }

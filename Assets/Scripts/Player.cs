@@ -10,12 +10,17 @@ public class Player : MonoBehaviour
     private float originalMoveSpeed = 5.0f;
     private float originalJumpForce = 5.0f;
 
-    public int Power = 100;
+    public float Power = 100;
     public float Damage;
 
     public float moveSpeed = 5f;
     private float jumpForce = 5.0f;
     private bool isGrounded = true;
+
+    // 이벤트 퍼블리셔
+    public static event Action OnPlayerHitSomethingEvent;
+    public static event Action OnGameOverEvent;
+    public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
     private void Start()
     {
@@ -47,10 +52,19 @@ public class Player : MonoBehaviour
         jumpForce = originalJumpForce;
     }
 
-    // 이벤트 퍼블리셔
-    public static event Action OnPlayerHitSomethingEvent;
-    public static event Action OnGameOverEvent;
-    public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
+    public void CommonTrap(float Damage)
+    {
+        //rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
+        Power -= Damage;
+        mainUI.UpdateDecreaseHpBar(Damage);
+
+        if (Power <= 0)
+        {
+            OnGameOverEvent?.Invoke();
+            Destroy(this);
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -70,13 +84,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Item"))
         {
             Debug.Log("Item");
-        }
-        if (collision.gameObject.CompareTag("Trap"))
-        {
-            Debug.Log("Trap for ");
-            rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
-            mainUI.UpdateDecreaseHpBar(10);
-            Debug.Log("Trap");
         }
     }
 
