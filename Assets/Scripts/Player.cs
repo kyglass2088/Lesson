@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // 이벤트 퍼블리셔
+    public static event Action OnPlayerHitSomethingEvent;
+    public static event Action OnGameOverEvent;
+    public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
+
     public Animator anim;
+
     private Rigidbody rb;
     public MainUI mainUI;
+    Quaternion originalRotation;
 
     private float originalMoveSpeed = 5.0f;
     private float originalJumpForce = 5.0f;
@@ -16,14 +23,16 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     private float jumpForce = 5.0f;
     private bool isGrounded = true;
+    private const int minHp = 0;
 
-    // 이벤트 퍼블리셔
-    public static event Action OnPlayerHitSomethingEvent;
-    public static event Action OnGameOverEvent;
-    public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
+    void StandUp()
+    {
+        transform.rotation = originalRotation;
+    }
 
     private void Start()
     {
+        originalRotation = transform.rotation;
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
     }
@@ -58,7 +67,7 @@ public class Player : MonoBehaviour
         Power -= Damage;
         mainUI.UpdateDecreaseHpBar(Damage);
 
-        if (Power <= 0)
+        if (Power <= minHp)
         {
             OnGameOverEvent?.Invoke();
             Destroy(this);
@@ -75,7 +84,7 @@ public class Player : MonoBehaviour
     {
         //OnPlayerHitSomethingEvent?.Invoke();
         //OnPlayerHitSomethingEventWithObj?.Invoke(collision.gameObject);
-
+        StandUp();
         if (collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Ground");

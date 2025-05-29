@@ -13085,6 +13085,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6514e2b9e097943bc45214ddf75a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  mainUI: {fileID: 0}
+  Power: 100
+  Damage: 0
+  moveSpeed: 5
 --- !u!54 &961322805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19606,6 +19611,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6514e2b9e097943bc45214ddf75a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  mainUI: {fileID: 0}
+  Power: 100
+  Damage: 0
+  moveSpeed: 5
 --- !u!1001 &1435525987
 PrefabInstance:
   m_ObjectHideFlags: 0

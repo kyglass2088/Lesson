@@ -11,16 +11,4 @@ public class CommonTrap : MonoBehaviour
             other.GetComponent<Player>().CommonTrap(TrapDamage);
         }
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            TrapDamage += 1.0f;
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            TrapDamage -= 1.0f;
-        }
-    }
 }
