@@ -7,21 +7,25 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform _parent;
 
-    public Transform[] position = new Transform[7];
-    // public Transform[] easyPosition = new Transform[9];
-    // public Transform[] hardPosition = new Transform[12];
+    const int EasyLevelTrapInt = 5;
+    const int NormalLevelTrapInt = 6;
+    const int HardLevelTrapInt = 8;
+
+    public Transform[] easyPosition = new Transform[EasyLevelTrapInt];
+    public Transform[] normalPosition = new Transform[NormalLevelTrapInt];
+    public Transform[] hardPosition = new Transform[HardLevelTrapInt];
     int MaxTrapNumbers = 15;
 
     void Start()
     {
-        CreateTraps();
+        CreateTrapsTutorial();
     }
 
-    void CreateTraps()
+    void CreateTrapsTutorial()
     {
-        for (int i = 0; i < MaxTrapNumbers; i++)
+        for (int i = 0; i < EasyLevelTrapInt; i++)
         {
-            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], position[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], easyPosition[i].position, Quaternion.identity);
             clone.transform.parent = _parent;
 
         }
@@ -29,9 +33,9 @@ public class GameManager : MonoBehaviour
 
     void CreateTrapsStageOne()
     {
-        for (int i = 0; i < MaxTrapNumbers; i++)
+        for (int i = 0; i < NormalLevelTrapInt; i++)
         {
-            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], position[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], normalPosition[i].position, Quaternion.identity);
             clone.transform.parent = _parent;
             // CommonTrap.TrapDamage = 15
 
@@ -40,9 +44,9 @@ public class GameManager : MonoBehaviour
 
     void CreateTrapsStageTwo()
     {
-        for (int i = 0; i < MaxTrapNumbers; i++)
+        for (int i = 0; i < HardLevelTrapInt; i++)
         {
-            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], position[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(Traps[Random.Range(0, 3)], hardPosition[i].position, Quaternion.identity);
             clone.transform.parent = _parent;
             // CommonTrap.TrapDamage = 25
 
@@ -51,12 +55,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.A))
+        if(Input.GetKeyUp(KeyCode.E))
         {
             CreateTrapsStageOne();
         }
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.H))
         {
             CreateTrapsStageTwo();
         }

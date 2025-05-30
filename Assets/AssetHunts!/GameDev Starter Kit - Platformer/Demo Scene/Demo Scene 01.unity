@@ -2092,17 +2092,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Traps:
   - {fileID: 1969992060203898739, guid: 27351507a0ce23f41bd7acabd54293fb, type: 3}
-  - {fileID: 1112600586038080502, guid: ba7075177d5cddd4cbd86ea150e5e1e2, type: 3}
-  - {fileID: 4361164151622024918, guid: 6c69766529ecd2f4f9faf5be168cf4a9, type: 3}
+  - {fileID: 4148567916993707534, guid: a3719887efeaab04f8b3c0292651a9c5, type: 3}
+  - {fileID: 8323296145611635300, guid: 91b240bc8e16b1c47bef43f3baf5c5e8, type: 3}
   _parent: {fileID: 39603280}
-  position:
+  easyPosition:
   - {fileID: 1666756016}
-  - {fileID: 868723629}
-  - {fileID: 135453375}
-  - {fileID: 698577705}
-  - {fileID: 2030361391}
+  - {fileID: 600631504}
+  - {fileID: 1888295503}
+  - {fileID: 1574803527}
+  - {fileID: 1342445271}
+  normalPosition:
+  - {fileID: 1666756016}
+  - {fileID: 600631504}
+  - {fileID: 1888295503}
+  - {fileID: 1574803527}
   - {fileID: 1342445271}
   - {fileID: 1758712262}
+  hardPosition:
+  - {fileID: 1666756016}
+  - {fileID: 600631504}
+  - {fileID: 1888295503}
+  - {fileID: 1574803527}
+  - {fileID: 1342445271}
+  - {fileID: 1758712262}
+  - {fileID: 946550878}
+  - {fileID: 135453375}
 --- !u!4 &623038482
 Transform:
   m_ObjectHideFlags: 0

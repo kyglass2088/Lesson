@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611249415587472975}
   m_Layer: 0
-  m_Name: WoodenSpike
+  m_Name: GroundCommonTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,11 +184,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Wooden_Spike_01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1929804735570677102, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}
+      propertyPath: m_TagString
+      value: Trap
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7452414343647722780, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1929804735570677102, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8606534816276898668}
   m_SourcePrefab: {fileID: 100100000, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}
+--- !u!1 &8496627699485346144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1929804735570677102, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}
+  m_PrefabInstance: {fileID: 8007996960166315022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8606534816276898668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8496627699485346144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adbdf55b56020f4587ad2c5ad6f0766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrapDamage: 10
 --- !u!4 &9124791253226083290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1262093672778749908, guid: ecb652c5b929d7f40b48d8482db98b21, type: 3}

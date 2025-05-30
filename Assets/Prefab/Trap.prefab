@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 195064720850191121}
   - component: {fileID: 3826610259652480180}
   - component: {fileID: 1368582499195910270}
-  - component: {fileID: 5657273427430434130}
   - component: {fileID: 3470676065299166069}
+  - component: {fileID: 1653772244859572072}
   m_Layer: 0
   m_Name: Obstacle_Round_Blade_01
   m_TagString: Untagged
@@ -88,19 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5657273427430434130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720244953435658667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4adbdf55b56020f4587ad2c5ad6f0766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TrapDamage: 10
 --- !u!64 &3470676065299166069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -123,6 +110,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2671394115422783608, guid: c09dddbedf6b83643ad5df12b7eddf7d, type: 3}
+--- !u!114 &1653772244859572072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720244953435658667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97dc6211d73fe664698d466d40c1a9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448419827084279129
 GameObject:
   m_ObjectHideFlags: 0
