@@ -8,16 +8,20 @@ public class Player : MonoBehaviour
     public static event Action OnGameOverEvent;
     public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
+    public PlayerData playerData;
     public Animator anim;
 
     private Rigidbody rb;
     public MainUI mainUI;
     Quaternion originalRotation;
+    Vector3 originnalPosition;
 
     private float originalMoveSpeed = 5.0f;
     private float originalJumpForce = 5.0f;
 
-    public float Power = 100;
+    public float MaxPower = 100;
+
+    public float Power;
     public float Damage;
 
     public float moveSpeed = 5f;
@@ -32,15 +36,21 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Power = MaxPower;
         originalRotation = transform.rotation;
+        originnalPosition = transform.position;
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
+        playerData.HP = Power;
     }
 
     public void InstanceKill()
     {
-        OnGameOverEvent?.Invoke();
-        Destroy(this);
+        playerData.Life--;
+        transform.position = originnalPosition;
+        playerData.HP = MaxPower;
+        if (playerData.Life <= 0)
+            OnGameOverEvent?.Invoke();
     }
 
     public void GameClear()
@@ -53,12 +63,16 @@ public class Player : MonoBehaviour
     {
         moveSpeed -= speed;
         jumpForce -= jumpforce;
+        playerData.MoveSpeed = moveSpeed;
+        playerData.JumpForce = jumpForce;
     }
 
     public void InitializeMovement()
     {
         moveSpeed = originalMoveSpeed;
         jumpForce = originalJumpForce;
+        playerData.MoveSpeed = moveSpeed;
+        playerData.JumpForce = jumpForce;
     }
 
     public void CommonTrap(float Damage)
@@ -66,11 +80,15 @@ public class Player : MonoBehaviour
         //rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
         Power -= Damage;
         mainUI.UpdateDecreaseHpBar(Damage);
+        playerData.HP = Power;
 
         if (Power <= minHp)
         {
-            OnGameOverEvent?.Invoke();
-            Destroy(this);
+            Power = MaxPower;
+            transform.position = originnalPosition;
+            playerData.Life--;
+            if (playerData.Life <= 0)
+                OnGameOverEvent?.Invoke();
         }
     }
 

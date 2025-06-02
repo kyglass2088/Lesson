@@ -10,10 +10,26 @@
         </ui:VisualElement>
     </ui:GroupBox>
     <ui:GroupBox name="GameState">
-        <ui:ProgressBar value="22" title="my-progress" name="Hp" />
-        <ui:Label text="Label" name="Life" />
-        <ui:Label text="Label" name="Time" />
-        <ui:Label text="Label" name="State" />
+        <ui:ProgressBar value="22" title="HP" name="Hp" data-source="project://database/Assets/Scripts/SO/PlayerData.asset?fileID=11400000&amp;guid=efb191e5912953d41b0e80e207dbf303&amp;type=2#PlayerData">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="HP" data-source="project://database/Assets/Scripts/SO/PlayerData.asset?fileID=11400000&amp;guid=efb191e5912953d41b0e80e207dbf303&amp;type=2#PlayerData" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:ProgressBar>
+        <ui:Label text="Label" name="Life" data-source="project://database/Assets/Scripts/SO/PlayerData.asset?fileID=11400000&amp;guid=efb191e5912953d41b0e80e207dbf303&amp;type=2#PlayerData">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="Life" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:Label text="Label" name="JumpForce" data-source="project://database/Assets/Scripts/SO/PlayerData.asset?fileID=11400000&amp;guid=efb191e5912953d41b0e80e207dbf303&amp;type=2#PlayerData">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="JumpForce" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:Label text="Label" name="MoveSpeed" data-source="project://database/Assets/Scripts/SO/PlayerData.asset?fileID=11400000&amp;guid=efb191e5912953d41b0e80e207dbf303&amp;type=2#PlayerData">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="MoveSpeed" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
         <ui:Label text="Label" name="Etc" />
     </ui:GroupBox>
 </ui:UXML>

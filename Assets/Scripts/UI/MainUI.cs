@@ -37,7 +37,6 @@ public class MainUI : MonoBehaviour
         ExitButton.style.display = DisplayStyle.None;
 
         //HpBar.value = Player.Power
-        HpBar.value = 100;
 
         Player.OnGameOverEvent += Player_OnGameOverEvent;
         Goal.OnGameClearEvent += Player_OnGameClearEvent;
@@ -50,11 +49,9 @@ public class MainUI : MonoBehaviour
 
     private void Player_OnGameOverEvent()
     {
-        HpBar.value = minHp;
         GameOverMessage.style.display = DisplayStyle.Flex;
         AgainButton.style.display = DisplayStyle.Flex;
         ExitButton.style.display = DisplayStyle.Flex;
-        HpBar.style.display = DisplayStyle.None;
     }
 
     private void Player_OnGameClearEvent()
@@ -62,7 +59,6 @@ public class MainUI : MonoBehaviour
         ClearMessage.style.display = DisplayStyle.Flex;
         AgainButton.style.display = DisplayStyle.Flex;
         ExitButton.style.display = DisplayStyle.Flex;
-        HpBar.style.display = DisplayStyle.None;
     }
 
 }
