@@ -122,4 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adbdf55b56020f4587ad2c5ad6f0766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
   TrapDamage: 10

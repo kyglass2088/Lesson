@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Transform m_PlayerContainer;
+    [SerializeField] Transform m_Player;
+
     // 이벤트 퍼블리셔
     public static event Action OnPlayerHitSomethingEvent;
     public static event Action OnGameOverEvent;
@@ -10,24 +13,18 @@ public class Player : MonoBehaviour
 
     public PlayerData playerData;
     public Animator anim;
-
-    private Rigidbody rb;
     public MainUI mainUI;
-    Quaternion originalRotation;
-    Vector3 originnalPosition;
-
-    private float originalMoveSpeed = 5.0f;
-    private float originalJumpForce = 5.0f;
 
     public float MaxPower = 100;
+    public float originalMoveSpeed = 5.0f;
+    public float originalJumpForce = 5.0f;
 
-    public float Power;
-    public float Damage;
+    public Vector3 originalPosition = Vector3.zero;
+    public Quaternion originalRotation = Quaternion.identity;
 
-    public float moveSpeed = 5f;
-    private float jumpForce = 5.0f;
+    private Rigidbody rb;
+
     private bool isGrounded = true;
-    private const int minHp = 0;
 
     void StandUp()
     {
@@ -36,62 +33,35 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Power = MaxPower;
+        playerData.HP = MaxPower;
+        playerData.MoveSpeed = originalMoveSpeed;
+        playerData.JumpForce = originalJumpForce;
+
         originalRotation = transform.rotation;
-        originnalPosition = transform.position;
+        originalPosition = transform.position;
+
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
-        playerData.HP = Power;
     }
 
-    public void InstanceKill()
+    public void OriginalTransform()
     {
-        playerData.Life--;
-        transform.position = originnalPosition;
-        playerData.HP = MaxPower;
-        if (playerData.Life <= 0)
-            OnGameOverEvent?.Invoke();
+        transform.rotation = originalRotation;
+        transform.position = originalPosition;
     }
 
     public void GameClear()
     {
-        moveSpeed = 0f;
-        jumpForce = 0f;
+        playerData.MoveSpeed = 0f;
+        playerData.JumpForce = 0f;
     }
 
-    public void MoveDisturbance(float speed, float jumpforce)
+    public void GameOver()
     {
-        moveSpeed -= speed;
-        jumpForce -= jumpforce;
-        playerData.MoveSpeed = moveSpeed;
-        playerData.JumpForce = jumpForce;
+        playerData.MoveSpeed = 0f;
+        playerData.JumpForce = 0f;
+        OnGameOverEvent?.Invoke();
     }
-
-    public void InitializeMovement()
-    {
-        moveSpeed = originalMoveSpeed;
-        jumpForce = originalJumpForce;
-        playerData.MoveSpeed = moveSpeed;
-        playerData.JumpForce = jumpForce;
-    }
-
-    public void CommonTrap(float Damage)
-    {
-        //rb.AddForce(new Vector3(3, 0, 30), ForceMode.Impulse);
-        Power -= Damage;
-        mainUI.UpdateDecreaseHpBar(Damage);
-        playerData.HP = Power;
-
-        if (Power <= minHp)
-        {
-            Power = MaxPower;
-            transform.position = originnalPosition;
-            playerData.Life--;
-            if (playerData.Life <= 0)
-                OnGameOverEvent?.Invoke();
-        }
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -120,27 +90,27 @@ public class Player : MonoBehaviour
      
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.left * playerData.MoveSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.right * playerData.MoveSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+            transform.position -= Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * playerData.JumpForce, ForceMode.Impulse);
             isGrounded = false;
         }
     }

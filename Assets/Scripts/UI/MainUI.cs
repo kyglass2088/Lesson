@@ -31,10 +31,10 @@ public class MainUI : MonoBehaviour
         AgainButton = root.Q<Button>("AgainButton");
         ExitButton = root.Q<Button>("ExitButton");
 
-        ClearMessage.style.display = DisplayStyle.None;
-        GameOverMessage.style.display = DisplayStyle.None;
-        AgainButton.style.display = DisplayStyle.None;
-        ExitButton.style.display = DisplayStyle.None;
+        ClearMessage.visible = false;
+        GameOverMessage.visible = false;
+        AgainButton.visible = false;
+        ExitButton.visible = false;
 
         //HpBar.value = Player.Power
 
@@ -49,16 +49,16 @@ public class MainUI : MonoBehaviour
 
     private void Player_OnGameOverEvent()
     {
-        GameOverMessage.style.display = DisplayStyle.Flex;
-        AgainButton.style.display = DisplayStyle.Flex;
-        ExitButton.style.display = DisplayStyle.Flex;
+        GameOverMessage.visible = true;
+        AgainButton.visible = true;
+        ExitButton.visible = true;
     }
 
     private void Player_OnGameClearEvent()
     {
-        ClearMessage.style.display = DisplayStyle.Flex;
-        AgainButton.style.display = DisplayStyle.Flex;
-        ExitButton.style.display = DisplayStyle.Flex;
+        ClearMessage.visible = true;
+        AgainButton.visible = true;
+        ExitButton.visible = true;
     }
 
 }

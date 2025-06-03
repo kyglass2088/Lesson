@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class MovementObstruction : MonoBehaviour
 {
+    public PlayerData playerData;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("User"))
         {
-            other.GetComponent<Player>().MoveDisturbance(3.0f, 3.0f);
+            playerData.MoveSpeed -= 3.0f;
+            playerData.JumpForce -= 3.0f;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("User"))
         {
-            other.GetComponent<Player>().InitializeMovement();
+            Player player = GetComponent<Player>();
+            playerData.MoveSpeed = player.originalMoveSpeed;
+            playerData.JumpForce = player.originalJumpForce;
         }
     }
 }

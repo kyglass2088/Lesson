@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97dc6211d73fe664698d466d40c1a9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
 --- !u!1 &1448419827084279129
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009773210841451047}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: InstanceTrap
   m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
