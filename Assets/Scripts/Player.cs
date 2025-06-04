@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public static event Action OnGameOverEvent;
     public static event Action<GameObject> OnPlayerHitSomethingEventWithObj;
 
+    public static event Action<Vector3, AudioType> OnRunSoundEvent;
+    public static event Action<Vector3, AudioType> OnJumpSoundEvent;
+
     public PlayerData playerData;
     public Animator anim;
     public MainUI mainUI;
@@ -91,26 +94,31 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.left * playerData.MoveSpeed * Time.deltaTime;
+            OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * playerData.MoveSpeed * Time.deltaTime;
+            OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position += Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
+            OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.position -= Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
+            OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)
         {
             rb.AddForce(Vector3.up * playerData.JumpForce, ForceMode.Impulse);
+            OnJumpSoundEvent?.Invoke(transform.position, AudioType.Run);
             isGrounded = false;
         }
     }

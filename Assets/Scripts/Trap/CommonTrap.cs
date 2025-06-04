@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class CommonTrap : MonoBehaviour
 {
+    public static event Action<Vector3, AudioType> OnCommonTrapSoundEvent;
+
     public PlayerData playerData;
     public float TrapDamage = 10.0f;
 
@@ -10,6 +13,7 @@ public class CommonTrap : MonoBehaviour
         if (other.gameObject.CompareTag("User"))
         {
             Player player = GetComponent<Player>();
+            OnCommonTrapSoundEvent?.Invoke(transform.position, AudioType.Hit);
             playerData.HP -= TrapDamage;
             if (playerData.HP <= 0)
             {

@@ -17,8 +17,8 @@ public class MovementObstruction : MonoBehaviour
         if (other.gameObject.CompareTag("User"))
         {
             Player player = GetComponent<Player>();
-            playerData.MoveSpeed = player.originalMoveSpeed;
-            playerData.JumpForce = player.originalJumpForce;
+            playerData.MoveSpeed = playerData.OriginalMoveSpeed;
+            playerData.JumpForce = playerData.OriginalJumpSpeed;
         }
     }
 }

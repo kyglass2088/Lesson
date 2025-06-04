@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InstanceKill : MonoBehaviour
 {
+    public static event Action<Vector3, AudioType> OnInstanceKillTrapSoundEvent;
+
     public PlayerData playerData;
 
     private void OnTriggerEnter(Collider other)
@@ -9,6 +12,7 @@ public class InstanceKill : MonoBehaviour
         if (other.gameObject.CompareTag("User"))
         {
             Player player = GetComponent<Player>();
+            OnInstanceKillTrapSoundEvent?.Invoke(transform.position, AudioType.Over);
             playerData.Life--;
             other.transform.rotation = player.originalRotation;
             other.transform.position = player.originalPosition;

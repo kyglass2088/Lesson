@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HiddenTrap : MonoBehaviour
 {
-    public static event Action<Vector3> OnTrapHActivateEvent;
+    public static event Action<Vector3, AudioType> OnHiddenTrapSoundEvent;
 
     Renderer renderer;
 
@@ -23,7 +23,10 @@ public class HiddenTrap : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("User"))
+        {
             renderer.enabled = true;
+            OnHiddenTrapSoundEvent?.Invoke(transform.position, AudioType.Hit);
+        }
         else
             renderer.enabled = false;
     }
