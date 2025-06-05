@@ -35,12 +35,7 @@ public class SoundManager : MonoBehaviour
         playList.Add(AudioType.Jump, jump);
         playList.Add(AudioType.Run, run);
 
-        HiddenTrap.OnHiddenTrapSoundEvent += PlaySoundEvent;
-        InstanceKill.OnInstanceKillTrapSoundEvent += PlaySoundEvent;
-        CommonTrap.OnCommonTrapSoundEvent += PlaySoundEvent;
-        Goal.OnGameClearSoundEvent += PlaySoundEvent;
-        Player.OnRunSoundEvent += PlaySoundEvent;
-        Player.OnJumpSoundEvent += PlaySoundEvent;
+        BaseTrap.OnSoundEvent += PlaySoundEvent;
     }
 
     public void PlaySoundEvent(Vector3 SoundPosition, AudioType audioClip)

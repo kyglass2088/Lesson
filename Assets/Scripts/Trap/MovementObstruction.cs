@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementObstruction : MonoBehaviour
+public class MovementObstruction : BaseTrap
 {
     public PlayerData playerData;
 
@@ -10,6 +10,8 @@ public class MovementObstruction : MonoBehaviour
         {
             playerData.MoveSpeed -= 3.0f;
             playerData.JumpForce -= 3.0f;
+            base.AudioPosition = transform.position;
+            base.OnTriggerEnter(other);
         }
     }
     private void OnTriggerExit(Collider other)

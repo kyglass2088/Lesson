@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class HiddenTrap : MonoBehaviour
+public class HiddenTrap : BaseTrap
 {
     public static event Action<Vector3, AudioType> OnHiddenTrapSoundEvent;
 
@@ -25,7 +25,8 @@ public class HiddenTrap : MonoBehaviour
         if (other.gameObject.CompareTag("User"))
         {
             renderer.enabled = true;
-            OnHiddenTrapSoundEvent?.Invoke(transform.position, AudioType.Hit);
+            base.AudioPosition = transform.position;
+            base.OnTriggerEnter(other);
         }
         else
             renderer.enabled = false;

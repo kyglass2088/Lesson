@@ -1,9 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class InstanceKill : MonoBehaviour
+public class InstanceKill : BaseTrap
 {
-    public static event Action<Vector3, AudioType> OnInstanceKillTrapSoundEvent;
 
     public PlayerData playerData;
 
@@ -11,14 +10,9 @@ public class InstanceKill : MonoBehaviour
     {
         if (other.gameObject.CompareTag("User"))
         {
-            Player player = GetComponent<Player>();
-            OnInstanceKillTrapSoundEvent?.Invoke(transform.position, AudioType.Over);
-            playerData.Life--;
-            other.transform.rotation = player.originalRotation;
-            other.transform.position = player.originalPosition;
-            playerData.HP = player.MaxPower;
-            if (playerData.Life <= 0)
-                player.GameOver();
+            base.AudioPosition = transform.position;
+            base.OnTriggerEnter(other);
+            base.PlayerDead(other.transform);
         }
     }
 }
