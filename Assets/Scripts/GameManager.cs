@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public Transform[] easyPosition = new Transform[EasyLevelTrapInt];
     public Transform[] normalPosition = new Transform[NormalLevelTrapInt];
     public Transform[] hardPosition = new Transform[HardLevelTrapInt];
-    int MaxTrapNumbers = 15;
 
     void Start()
     {

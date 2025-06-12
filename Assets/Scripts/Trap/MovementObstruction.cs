@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class MovementObstruction : BaseTrap
 {
-    public PlayerData playerData;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("User"))

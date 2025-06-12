@@ -18,12 +18,12 @@ public class Player : MonoBehaviour
     public Animator anim;
     public MainUI mainUI;
 
-    public float MaxPower = 100;
+    public int MaxPower = 100;
     public float originalMoveSpeed = 5.0f;
     public float originalJumpForce = 5.0f;
 
-    public Vector3 originalPosition = Vector3.zero;
-    public Quaternion originalRotation = Quaternion.identity;
+    public Vector3 originalPosition;
+    public Quaternion originalRotation;
 
     private Rigidbody rb;
 
@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
+        playerData.OnGameOverEvent += GameOver;
     }
 
     public void OriginalTransform()
@@ -57,6 +58,15 @@ public class Player : MonoBehaviour
     {
         playerData.MoveSpeed = 0f;
         playerData.JumpForce = 0f;
+    }
+
+    public void PlayerDead()
+    {
+        playerData.Life--;
+        playerData.HP = MaxPower;
+        OriginalTransform();
+        //if (playerData.Life <= 0)
+        //    GameOver();
     }
 
     public void GameOver()
@@ -93,27 +103,47 @@ public class Player : MonoBehaviour
      
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            anim.SetBool("Run", true);
             transform.position += Vector3.left * playerData.MoveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 270, 0);
             OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+            anim.SetBool("Run", false);
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            anim.SetBool("Run", true);
             transform.position += Vector3.right * playerData.MoveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 90, 0);
             OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+            anim.SetBool("Run", false);
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            anim.SetBool("Run", true);
             transform.position += Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
 
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+            anim.SetBool("Run", false);
+
         if (Input.GetKey(KeyCode.DownArrow))
         {
+            anim.SetBool("Run", true);
             transform.position -= Vector3.forward * playerData.MoveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             OnRunSoundEvent?.Invoke(transform.position, AudioType.Run);
         }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+            anim.SetBool("Run", false);
 
         if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)
         {

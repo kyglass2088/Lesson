@@ -4362,6 +4362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adbdf55b56020f4587ad2c5ad6f0766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myType: 0
   playerData: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
   TrapDamage: 10
 --- !u!1001 &1030383699
@@ -10090,6 +10091,30 @@ PrefabInstance:
       propertyPath: playerData
       value: 
       objectReference: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
+    - target: {fileID: 7460663732611870594, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: originalPosition.x
+      value: 23.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460663732611870594, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: originalPosition.y
+      value: 2.134
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460663732611870594, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: originalPosition.z
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182543140346773021, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182543140346773021, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ad202f9dbc4f60c49a5f7d1d0546d1ec, type: 2}
+    - target: {fileID: 9182543140346773021, guid: 7fa23f19bf433be4090d558140d31e31, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
