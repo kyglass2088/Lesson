@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
         playerData.OnGameOverEvent += GameOver;
+        playerData.OnPlayerDeadEvent += PlayerDead;
     }
 
     public void OriginalTransform()
@@ -62,11 +63,7 @@ public class Player : MonoBehaviour
 
     public void PlayerDead()
     {
-        playerData.Life--;
-        playerData.HP = MaxPower;
         OriginalTransform();
-        //if (playerData.Life <= 0)
-        //    GameOver();
     }
 
     public void GameOver()

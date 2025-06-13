@@ -8,11 +8,11 @@ public class BindingTest : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.N))
         {
-            playerData.HP = 9;
+            playerData.Life = 5;
         }
         if (Input.GetKey(KeyCode.O))
         {
-            playerData.HP = 100;
+            int a = playerData.Life;
         }
     }
 }

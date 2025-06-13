@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseTrap : MonoBehaviour
 {
     public static event Action<Vector3, AudioType> OnSoundEvent;
+    public static event Action<int> OnDamageTrapCollisionEvent;
     public AudioType myType;
 
     public PlayerData playerData;
@@ -16,10 +17,16 @@ public class BaseTrap : MonoBehaviour
         OnSoundEvent?.Invoke(AudioPosition, myType);
     }
 
+    public virtual void DamageTrapCollision(int TrapDamage)
+    {
+        OnDamageTrapCollisionEvent?.Invoke(TrapDamage);
+    }
+
 }
 
 public class CommonTrap : BaseTrap
 {
+
     public int TrapDamage = 10;
 
     public override void OnTriggerEnter(Collider other)
@@ -30,9 +37,7 @@ public class CommonTrap : BaseTrap
             base.AudioPosition = transform.position;
             base.OnTriggerEnter(other);
 
-            playerData.HP -= TrapDamage;
-            if (playerData.HP <= 0)
-                player.PlayerDead();
+            DamageTrapCollision(TrapDamage);
             // 플레이어가 죽는 경우를 상위 클래스에 추가했는 데 Trap은 Trap의 일만 하는 것이
             // 좋다고 해서 PlayerDead() 함수를 변경하기
         }

@@ -8,6 +8,8 @@ public class MainUI : MonoBehaviour
 
     const int minHp = 0;
 
+    PlayerData playerData;
+
     ProgressBar HpBar;
     Label LifeLabel;
     Label TimeLabel;
@@ -40,6 +42,12 @@ public class MainUI : MonoBehaviour
 
         Player.OnGameOverEvent += Player_OnGameOverEvent;
         Goal.OnGameClearEvent += Player_OnGameClearEvent;
+        BaseTrap.OnDamageTrapCollisionEvent += PlayerHit;
+    }
+
+    public void PlayerHit(int Damage)
+    {
+        playerData.HP -= Damage;
     }
 
     public void UpdateDecreaseHpBar(float number)

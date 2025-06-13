@@ -5,21 +5,23 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     public event Action OnGameOverEvent;
+    public event Action OnPlayerDeadEvent;
 
     EventBinding<PlayerEvent> playerEventBinding;
     private int hp;
+    public int MaxHp = 100;
 
-    private void OnEnable()
-    {
-        playerEventBinding = new EventBinding<PlayerEvent>(PlayerEventHandler);
-        EventBus<PlayerEvent>.Register(playerEventBinding);
-    }
+    //private void OnEnable()
+    //{
+    //    playerEventBinding = new EventBinding<PlayerEvent>(PlayerEventHandler);
+    //    EventBus<PlayerEvent>.Register(playerEventBinding);
+    //}
 
-    private void PlayerEventHandler(Player @event)
-    {
-        Debug.Log("@event");
-        Debug.Log(@event);
-    }
+    //private void PlayerEventHandler(Player @event)
+    //{
+    //    Debug.Log("@event");
+    //    Debug.Log(@event);
+    //}
 
     public int HP
     {
@@ -29,17 +31,24 @@ public class PlayerData : ScriptableObject
             if (hp <= 0)
             {
                 Life--;
-
+                hp = MaxHp;
+                OnPlayerDeadEvent?.Invoke();
             }
         }
     }
-
+    [field:SerializeField]
+    private int life = 5;
     public int Life
     {
-        get { return life; }
+        get 
+        {
+            Debug.Log("Life get");
+            return life;
+        }
         set
         {
             life = value;
+            Debug.Log("Life set");
             OnGameOverEvent?.Invoke();
 
             if (life == 0)
@@ -58,11 +67,10 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    public float MaxHp = 100;
+
     public float OriginalMoveSpeed = 5f;
     public float OriginalJumpSpeed = 5f; 
 
-    public int life = 5;
     public float JumpForce = 5f;
     public float MoveSpeed = 5;
     public float bounceForce = 10f;
