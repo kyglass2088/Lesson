@@ -6,8 +6,6 @@ public class MainUI : MonoBehaviour
 {
     public VisualElement mainUI;
 
-    const int minHp = 0;
-
     PlayerData playerData;
 
     ProgressBar HpBar;

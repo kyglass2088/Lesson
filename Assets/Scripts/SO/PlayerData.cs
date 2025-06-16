@@ -8,7 +8,7 @@ public class PlayerData : ScriptableObject
     public event Action OnPlayerDeadEvent;
 
     EventBinding<PlayerEvent> playerEventBinding;
-    private int hp;
+    private int hp = 100;
     public int MaxHp = 100;
 
     //private void OnEnable()
