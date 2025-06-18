@@ -6,7 +6,7 @@ public class MainUI : MonoBehaviour
 {
     public VisualElement mainUI;
 
-    PlayerData playerData;
+    public PlayerData playerData;
 
     ProgressBar HpBar;
     Label LifeLabel;
@@ -36,7 +36,7 @@ public class MainUI : MonoBehaviour
         AgainButton.visible = false;
         ExitButton.visible = false;
 
-        //HpBar.value = Player.Power
+        HpBar.value = playerData.HP;
 
         Player.OnGameOverEvent += Player_OnGameOverEvent;
         Goal.OnGameClearEvent += Player_OnGameClearEvent;
@@ -46,6 +46,7 @@ public class MainUI : MonoBehaviour
     public void PlayerHit(int Damage)
     {
         playerData.HP -= Damage;
+        UpdateDecreaseHpBar(Damage);
     }
 
     public void UpdateDecreaseHpBar(float number)

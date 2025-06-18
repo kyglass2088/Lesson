@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         Goal.OnGameClearEvent += GameClear;
+
         playerData.OnGameOverEvent += GameOver;
         playerData.OnPlayerDeadEvent += PlayerDead;
     }

@@ -49,7 +49,6 @@ public class PlayerData : ScriptableObject
         {
             life = value;
             Debug.Log("Life set");
-            OnGameOverEvent?.Invoke();
 
             if (life == 0)
             {
@@ -61,8 +60,6 @@ public class PlayerData : ScriptableObject
                 });
 
                 EventBus<TestEvent>.Raise(new TestEvent { });
-
-                OnGameOverEvent?.Invoke();
             }
         }
     }
