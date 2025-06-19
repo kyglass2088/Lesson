@@ -8,7 +8,7 @@ public class PlayerData : ScriptableObject
     public event Action OnPlayerDeadEvent;
 
     EventBinding<PlayerEvent> playerEventBinding;
-    private int hp = 100;
+    private float hp = 100;
     public int MaxHp = 100;
 
     //private void OnEnable()
@@ -23,8 +23,9 @@ public class PlayerData : ScriptableObject
     //    Debug.Log(@event);
     //}
 
-    public int HP
+    public float HP
     {
+        
         get { return hp; }
         set { hp = value;
 

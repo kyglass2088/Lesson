@@ -13,6 +13,9 @@ public class StageManager : MonoBehaviour
     [SerializeField] Transform startPoint;
     [SerializeField] Transform endPoint;
 
+    public StageLevelSO[] stageLevels;
+    public StageLevelSO currentStageLevel;
+
     void Start()
     {
         _3DTiles.Clear(); // Extention...
@@ -31,13 +34,23 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    void StageLevelUp()
+    public void CreateCurrentState(StageLevelSO currentState)
     {
+        List<GameObject> gameObjectTraps = new List<GameObject>();
+        for (int i = 0; i < currentState.TrapAmount; i++)
+        {
+            GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
 
-    }
+            gameObjectTraps.Add(clone);
+        }
 
-    void StageLevelDown()
-    {
+        List<GameObject> gameObjectCollectibles = new List<GameObject>();
+        for (int i = 0; i < currentState.CollectibleNumber; i++)
+        {
+            GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
+
+            gameObjectCollectibles.Add(clone);
+        }
 
     }
 

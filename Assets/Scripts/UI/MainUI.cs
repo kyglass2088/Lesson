@@ -43,7 +43,7 @@ public class MainUI : MonoBehaviour
         BaseTrap.OnDamageTrapCollisionEvent += PlayerHit;
     }
 
-    public void PlayerHit(int Damage)
+    public void PlayerHit(float Damage)
     {
         playerData.HP -= Damage;
         UpdateDecreaseHpBar(Damage);

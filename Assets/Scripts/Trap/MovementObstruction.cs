@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class MovementObstruction : BaseTrap
 {
+    public float deceleration;
+    public float lowerJump;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("User"))
         {
-            playerData.MoveSpeed -= 3.0f;
-            playerData.JumpForce -= 3.0f;
+            if (playerData.MoveSpeed - deceleration > 0)
+                playerData.MoveSpeed -= deceleration;
+            if (playerData.JumpForce - lowerJump > 0)
+                playerData.JumpForce -= lowerJump;
+
             base.AudioPosition = transform.position;
             base.OnTriggerEnter(other);
         }
@@ -16,7 +22,6 @@ public class MovementObstruction : BaseTrap
     {
         if (other.gameObject.CompareTag("User"))
         {
-            Player player = GetComponent<Player>();
             playerData.MoveSpeed = playerData.OriginalMoveSpeed;
             playerData.JumpForce = playerData.OriginalJumpSpeed;
         }
