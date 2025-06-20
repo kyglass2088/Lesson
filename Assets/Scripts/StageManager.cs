@@ -14,10 +14,13 @@ public class StageManager : MonoBehaviour
     [SerializeField] Transform endPoint;
 
     public StageLevelSO[] stageLevels;
-    public StageLevelSO currentStageLevel;
+    public StageLevelSO CurrentStageLevel;
+
+    public int StageLevelInt;
 
     void Start()
     {
+        CurrentStageLevel = stageLevels[StageLevelInt];
         _3DTiles.Clear(); // Extention...
         _parent.Clear();
         CreateTrap();
@@ -50,6 +53,18 @@ public class StageManager : MonoBehaviour
             GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
 
             gameObjectCollectibles.Add(clone);
+        }
+
+        for (int i = currentState.TrapAmount; i < _positions.Length; i++)
+        {
+            gameObjectCollectibles[i].transform.position = _positions[i].position;
+        }
+        UTILS.Shuffle(gameObjectCollectibles);
+
+        for (int i = 0; i < currentState.TrapAmount; i++)
+        {
+            gameObjectTraps[i].transform.position = _positions[i].position;
+            gameObjectTraps[i].transform.parent = _parent;
         }
 
     }

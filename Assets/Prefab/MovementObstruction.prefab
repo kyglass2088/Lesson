@@ -100,7 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024f87e61fa47494e833263a0d79424c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageLevelSO: {fileID: 11400000, guid: 4cd2643a8ae016a4d8c877f105cb50d8, type: 2}
+  myType: 0
   playerData: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
+  deceleration: 0
+  lowerJump: 0
 --- !u!65 &-2688163271666392377
 BoxCollider:
   m_ObjectHideFlags: 0

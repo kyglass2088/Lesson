@@ -1365,8 +1365,12 @@ MonoBehaviour:
   _parent: {fileID: 1010067717}
   startPoint: {fileID: 1123567805}
   endPoint: {fileID: 333571799}
-  stageLevels: []
-  currentStageLevel: {fileID: 0}
+  stageLevels:
+  - {fileID: 11400000, guid: 4cd2643a8ae016a4d8c877f105cb50d8, type: 2}
+  - {fileID: 11400000, guid: 563796d81f8cf994aacaf7b8743dcd28, type: 2}
+  - {fileID: 11400000, guid: bc07eda5fcb326a49928916f8a3996e7, type: 2}
+  CurrentStageLevel: {fileID: 0}
+  StageLevelInt: 3
 --- !u!1001 &206861629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4884,9 +4888,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageLevelSO: {fileID: 0}
+  stageManager: {fileID: 0}
   myType: 0
   playerData: {fileID: 11400000, guid: efb191e5912953d41b0e80e207dbf303, type: 2}
-  stageLevelSO: {fileID: 0}
   TrapDamage: 10
 --- !u!1 &1010067716
 GameObject:

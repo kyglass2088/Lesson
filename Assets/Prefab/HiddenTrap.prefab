@@ -121,3 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02d61dba9f55904abb12dae7c97e3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageLevelSO: {fileID: 11400000, guid: 4cd2643a8ae016a4d8c877f105cb50d8, type: 2}
+  myType: 0
+  playerData: {fileID: 0}

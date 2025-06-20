@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CommonTrap : BaseTrap
 {
-    public StageLevelSO stageLevelSO;
     public int TrapDamage = 10;
 
     public override void OnTriggerEnter(Collider other)

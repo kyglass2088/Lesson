@@ -11,7 +11,7 @@ public class Lever : MonoBehaviour
     {
         if (other.gameObject.CompareTag("User"))
         {
-            transform.rotation = Quaternion.Euler(0, 0, -90);
+            transform.rotation = Quaternion.Euler(0, 0, -75);
             OnLeverEvent?.Invoke();
         }
     }

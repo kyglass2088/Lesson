@@ -22,7 +22,7 @@ public class HighJumpItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("User") && meshRenderer)
         {
-            playerData.JumpForce *= 5.0f;
+            playerData.JumpForce += 10.0f;
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class BaseTrap : MonoBehaviour
 {
     public StageLevelSO stageLevelSO;
+    public StageManager stageManager;
     public static event Action<Vector3, AudioType> OnSoundEvent;
     public static event Action<float> OnDamageTrapCollisionEvent;
     public static event Action<ParticleType, Vector3> OnHitVFXEvent;
@@ -13,10 +14,11 @@ public class BaseTrap : MonoBehaviour
 
     protected Vector3 AudioPosition;
 
-    //private void Start()
-    //{
-    //    transform.localScale *= stageLevelSO.TrapSizeMagnification;
-    //}
+    private void Start()
+    {
+        //stageLevelSO = stageManager.CurrentStageLevel;
+        transform.localScale *= stageLevelSO.TrapSizeMagnification;
+    }
 
     public virtual void OnTriggerEnter(Collider other)
     {
@@ -34,5 +36,4 @@ public class BaseTrap : MonoBehaviour
             OnHitVFXEvent?.Invoke(ParticleType.weakHit, position);
 
     }
-
 }
