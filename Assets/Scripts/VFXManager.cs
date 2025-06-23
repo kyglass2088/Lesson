@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public enum ParticleType
+public enum PlayerHitParticleType
 {
     strongHit, // 많은 데미지를 받았을 때
     normalHit, // 중간 정도의 데미지를 받았을 때
@@ -12,7 +12,7 @@ public enum ParticleType
 public class VFXManager : MonoBehaviour
 {
 
-    public Dictionary<ParticleType, ParticleSystem> playList;
+    public Dictionary<PlayerHitParticleType, ParticleSystem> playList;
 
     [SerializeField] ParticleSystem psPrefab;
     [SerializeField] ParticleSystem strongHit;
@@ -21,17 +21,17 @@ public class VFXManager : MonoBehaviour
 
     void Start()
     {
-        playList = new Dictionary<ParticleType, ParticleSystem>();
-        playList.Add(ParticleType.strongHit, strongHit);
-        playList.Add(ParticleType.normalHit, NormalHit);
-        playList.Add(ParticleType.weakHit, weakgHit);
+        playList = new Dictionary<PlayerHitParticleType, ParticleSystem>();
+        playList.Add(PlayerHitParticleType.strongHit, strongHit);
+        playList.Add(PlayerHitParticleType.normalHit, NormalHit);
+        playList.Add(PlayerHitParticleType.weakHit, weakgHit);
 
         BaseTrap.OnHitVFXEvent += BaseMine_OnHitEvent;
 
 
     }
 
-    private void BaseMine_OnHitEvent(ParticleType particle, Vector3 pos)
+    private void BaseMine_OnHitEvent(PlayerHitParticleType particle, Vector3 pos)
     {
         ParticleSystem newParticle = Instantiate(playList[particle], pos, Quaternion.identity);
 

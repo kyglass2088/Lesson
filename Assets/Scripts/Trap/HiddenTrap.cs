@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HiddenTrap : BaseTrap
 {
-    public static event Action<Vector3, AudioType> OnHiddenTrapSoundEvent;
+    public static event Action<Vector3, playerAudioType> OnHiddenTrapSoundEvent;
 
     Renderer renderer;
 

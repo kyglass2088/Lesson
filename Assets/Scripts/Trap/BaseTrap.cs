@@ -5,10 +5,10 @@ public class BaseTrap : MonoBehaviour
 {
     public StageLevelSO stageLevelSO;
     public StageManager stageManager;
-    public static event Action<Vector3, AudioType> OnSoundEvent;
+    public static event Action<Vector3, playerAudioType> OnSoundEvent;
     public static event Action<float> OnDamageTrapCollisionEvent;
-    public static event Action<ParticleType, Vector3> OnHitVFXEvent;
-    public AudioType myType;
+    public static event Action<PlayerHitParticleType, Vector3> OnHitVFXEvent;
+    public playerAudioType myType;
 
     public PlayerData playerData;
 
@@ -29,11 +29,11 @@ public class BaseTrap : MonoBehaviour
     {
         OnDamageTrapCollisionEvent?.Invoke(TrapDamage);
         if (TrapDamage > (playerData.MaxHp / 2))
-            OnHitVFXEvent?.Invoke(ParticleType.strongHit, position);
+            OnHitVFXEvent?.Invoke(PlayerHitParticleType.strongHit, position);
         else if (TrapDamage > (playerData.MaxHp / 10))
-            OnHitVFXEvent?.Invoke(ParticleType.normalHit, position);
+            OnHitVFXEvent?.Invoke(PlayerHitParticleType.normalHit, position);
         else
-            OnHitVFXEvent?.Invoke(ParticleType.weakHit, position);
+            OnHitVFXEvent?.Invoke(PlayerHitParticleType.weakHit, position);
 
     }
 }
