@@ -52,6 +52,7 @@ public class SoundManager : MonoBehaviour
         itemList.Add(ItemAudioType.spinItem, spinItem);
 
         NewCoin.OnItemSpinEvent += ItemSpinEvent;
+        MoveCoin.OnItemSpinEvent += ItemSpinEvent;
         BaseTrap.OnSoundEvent += PlaySoundEvent;
     }
 
