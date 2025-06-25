@@ -11,6 +11,8 @@ public class MoveCoin : MonoBehaviour
     public ItemAudioType ItemAudioType;
     public ItemParticle ItemParticle;
 
+    public GameObject gameObject;
+
     int TripCount = 0;
 
     public void PlayerGetItem()
@@ -33,7 +35,7 @@ public class MoveCoin : MonoBehaviour
 
     public void ItemDestroy()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
