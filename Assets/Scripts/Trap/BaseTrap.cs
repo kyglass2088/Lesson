@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BaseTrap : MonoBehaviour
 {
-    public StageLevelSO stageLevelSO;
+    public StageLevelSO currentStageLevelSO;
     public StageManager stageManager;
     public static event Action<Vector3, playerAudioType> OnSoundEvent;
     public static event Action<float> OnDamageTrapCollisionEvent;
@@ -16,13 +16,21 @@ public class BaseTrap : MonoBehaviour
 
     private void Start()
     {
-        //stageLevelSO = stageManager.CurrentStageLevel;
-        transform.localScale *= stageLevelSO.TrapSizeMagnification;
+        if (StageManager.IsCreateTrap)
+        {
+            StageManager.OnCurrentStageLevelSO += CurrentStageLevel;
+            transform.localScale *= currentStageLevelSO.TrapSizeMagnification;
+        }
     }
 
     public virtual void OnTriggerEnter(Collider other)
     {
         OnSoundEvent?.Invoke(AudioPosition, myType);
+    }
+
+    public void CurrentStageLevel(StageLevelSO stageLevelSO)
+    {
+        currentStageLevelSO = stageLevelSO;
     }
 
     public void DamageTrapCollision(float TrapDamage, Vector3 position)

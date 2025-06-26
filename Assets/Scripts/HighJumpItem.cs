@@ -5,7 +5,7 @@ public class HighJumpItem : MonoBehaviour
 {
     [SerializeField] MeshRenderer meshRenderer;
 
-    public PlayerData playerData;
+    public Player player;
 
     void Start()
     {
@@ -20,9 +20,10 @@ public class HighJumpItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("User") && meshRenderer)
+        if (other.gameObject.CompareTag("User") && meshRenderer.enabled)
         {
-            playerData.JumpForce += 10.0f;
+            Debug.Log("HighJumpItem");
+            player.playerData.JumpForce += 10.0f;
         }
     }
 }

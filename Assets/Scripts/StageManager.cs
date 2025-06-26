@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,10 +14,14 @@ public class StageManager : MonoBehaviour
     [SerializeField] Transform startPoint;
     [SerializeField] Transform endPoint;
 
+    public static event Action<StageLevelSO> OnCurrentStageLevelSO;
+
     public StageLevelSO[] stageLevels;
     public StageLevelSO CurrentStageLevel;
 
     public int StageLevelInt;
+
+    public static bool IsCreateTrap = false;
 
     void Start()
     {
@@ -31,10 +36,12 @@ public class StageManager : MonoBehaviour
         int max = _positions.Length;
         for (int i = 0; i < max; i++)
         {
-            GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(_mines[UnityEngine.Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
 
             clone.transform.parent = _parent;
         }
+        IsCreateTrap = true;
+        OnCurrentStageLevelSO?.Invoke(CurrentStageLevel);
     }
 
     public void CreateCurrentState(StageLevelSO currentState)
@@ -42,7 +49,7 @@ public class StageManager : MonoBehaviour
         List<GameObject> gameObjectTraps = new List<GameObject>();
         for (int i = 0; i < currentState.TrapAmount; i++)
         {
-            GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(_mines[UnityEngine.Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
 
             gameObjectTraps.Add(clone);
         }
@@ -50,7 +57,7 @@ public class StageManager : MonoBehaviour
         List<GameObject> gameObjectCollectibles = new List<GameObject>();
         for (int i = 0; i < currentState.CollectibleNumber; i++)
         {
-            GameObject clone = Instantiate(_mines[Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
+            GameObject clone = Instantiate(_mines[UnityEngine.Random.Range(0, _mines.Length)], _positions[i].position, Quaternion.identity);
 
             gameObjectCollectibles.Add(clone);
         }

@@ -85,6 +85,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovementObstruction
       objectReference: {fileID: 0}
+    - target: {fileID: 3892252894596250091, guid: ba7075177d5cddd4cbd86ea150e5e1e2, type: 3}
+      propertyPath: lowerJump
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892252894596250091, guid: ba7075177d5cddd4cbd86ea150e5e1e2, type: 3}
+      propertyPath: deceleration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
